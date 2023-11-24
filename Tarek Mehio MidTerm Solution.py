@@ -1,5 +1,7 @@
 import json
 import re
+import requests
+from bs4 import BeautifulSoup 
 #this code to open (load) the json file
 mytabs = {}
 myjsonfile = open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "r")
@@ -7,6 +9,26 @@ jsondata = myjsonfile.read()
 mytabs = json.loads(jsondata)
 
 
+
+def switchTab(mytabs):
+   viewTabs(mytabs)
+   user_input = int(input("Enter the number of the tab: "))
+   #if the input was empty this if statement will not execut
+   if user_input != "":
+    #checks if the input can be converted to string
+        try:
+            num_to_int = int(user_input)
+        except:
+            print("Invalid input, Enter a number")
+            mainMenu()
+   if user_input > len()
+   
+   print(*mytabs[0].values())
+   #https://www.geeksforgeeks.org/python-web-scraping-tutorial/
+   # r = requests.get("https://www.google.com")
+   # soup = BeautifulSoup(r.content, 'html.parser') 
+   # print(soup.prettify()) 
+   
 #Save a new tab in the JSON file
 def openTab(mytabs):
     print(mytabs)
@@ -26,12 +48,16 @@ def openTab(mytabs):
         print(mytabs)
     else:
         print("Invalid URL")
-
+        
+def viewTabs(mytabs):
+   for i in range(len(mytabs)):
+        print(i,"-", mytabs[i])
+        
+#Close/remove the tab function
 def closeTab(mytabs):
     
     #print the tabs in the list
-    for i in range(len(mytabs)):
-        print(i,"-", mytabs[i])
+    viewTabs(mytabs)
     
     ind_num = input("Enter the number of the tab you want to remove")
     #if the input was empty this if statement will not execut
@@ -57,7 +83,11 @@ def closeTab(mytabs):
         print(mytabs)
         with open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "w") as f:
             json.dump(mytabs, f)
+            
 
+
+
+   
 
 # Main menu that display option lists
 def mainMenu():
@@ -82,7 +112,8 @@ def mainMenu():
             closeTab(mytabs)
             mainMenu()
         elif user_input == "3":
-            switchTab()
+            switchTab(mytabs)
+            mainMenu()
         elif user_input == "4":
             displayAllTabs()
         elif user_input == 5:
