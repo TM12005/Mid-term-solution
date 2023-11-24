@@ -46,6 +46,8 @@ def closeTab(mytabs):
         
     if ind_num == "":
         mytabs.pop()
+        with open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "w") as f:
+            json.dump(mytabs, f)
     elif num_to_int > len(mytabs):
         print("invalid number")
     elif num_to_int < 0:
@@ -53,6 +55,8 @@ def closeTab(mytabs):
     else:
         mytabs.pop(num_to_int)
         print(mytabs)
+        with open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "w") as f:
+            json.dump(mytabs, f)
 
 
 # Main menu that display option lists
