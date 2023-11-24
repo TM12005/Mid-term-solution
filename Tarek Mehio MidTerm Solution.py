@@ -1,5 +1,5 @@
 import json
-from urllib2 import Request, urlopen, URLError
+import re
 #this code to open (load) the json file
 mytabs = {}
 myjsonfile = open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "r")
@@ -10,21 +10,16 @@ mytabs = json.loads(jsondata)
 def openTab(mytabs):
     print(mytabs)
     #inputs from the user (Title and URL)
-    tab_title = input("Enter tab name:")
-    tab_url = input("Enter URL")
-  
-    req = Request(tab_url)
-    try:
-     response = urlopen(req)
-    except URLError, e:
-        if hasattr(e, 'reason'):
-            print('We failed to reach a server.')
-            print ('Reason: ', e.reason)
-        elif hasattr(e, 'code'):
-         print('The server couldn\'t fulfill the request.')
-         print('Error code: ', e.code)
-        else:
-            print('URL is good!')
+    tab_title = input("Enter tab name: ")
+    tab_url = input("Enter URL: ")
+    #check if url is valid
+    #https://snyk.io/blog/secure-python-url-validation/
+    pattern = "^https:\/\/[0-9A-z.]+.[0-9A-z.]+.[a-z]+$"
+    result = re.match(pattern, "https://"+tab_url)
+    if result: 
+        print("Tab added")
+    else:
+        print("Invalid URL")
     #Updating the dictionary and saving the changes in the JSON
     mytabs.update({tab_title : tab_url})
     with open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "w") as f:
@@ -50,7 +45,7 @@ def mainMenu():
     user_input = input("Please Choose A Number:")
     #Continues While loop that exits only when user enter "9"
     while user_input != 9:
-        if user_input == 1:
+        if user_input == "1":
             openTab(mytabs)
             mainMenu()
         elif user_input == 2:
