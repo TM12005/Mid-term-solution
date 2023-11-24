@@ -28,13 +28,30 @@ def openTab(mytabs):
         print("Invalid URL")
 
 def closeTab(mytabs):
+    
+    #print the tabs in the list
     for i in range(len(mytabs)):
         print(i,"-", mytabs[i])
-    ind_num = int(input("Enter the number of the tab you want to remove"))
+    
+    ind_num = input("Enter the number of the tab you want to remove")
+    #if the input was empty this if statement will not execut
+    if ind_num != "":
+    #checks if the input can be converted to string
+        try:
+            num_to_int = int(ind_num)
+        except:
+            print("Invalid input, Enter a number")
+            mainMenu()
+    
+        
     if ind_num == "":
         mytabs.pop()
-    elif ind_num > len(mytabs):
+    elif num_to_int > len(mytabs):
         print("invalid number")
+    elif num_to_int < 0:
+        print("invalid number")
+    else:
+        mytabs.pop(num_to_int)
         print(mytabs)
 
 
