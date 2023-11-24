@@ -6,6 +6,7 @@ myjsonfile = open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "r")
 jsondata = myjsonfile.read()
 mytabs = json.loads(jsondata)
 
+
 #Save a new tab in the JSON file
 def openTab(mytabs):
     print(mytabs)
@@ -18,15 +19,23 @@ def openTab(mytabs):
     result = re.match(pattern, "https://"+tab_url)
     if result: 
         print("Tab added")
+    #Updating the dictionary and saving the changes in the JSON
+        mytabs.append({tab_title : tab_url})
+        with open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "w") as f:
+            json.dump(mytabs, f)
+        print(mytabs)
     else:
         print("Invalid URL")
-    #Updating the dictionary and saving the changes in the JSON
-    mytabs.update({tab_title : tab_url})
-    with open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "w") as f:
-        json.dump(mytabs, f)
-    print(mytabs)
 
-
+def closeTab(mytabs):
+    for i in range(len(mytabs)):
+        print(i,"-", mytabs[i])
+    ind_num = int(input("Enter the number of the tab you want to remove"))
+    if ind_num == "":
+        mytabs.pop()
+    elif ind_num > len(mytabs):
+        print("invalid number")
+        print(mytabs)
 
 
 # Main menu that display option lists
@@ -48,11 +57,12 @@ def mainMenu():
         if user_input == "1":
             openTab(mytabs)
             mainMenu()
-        elif user_input == 2:
-            closeTab()
-        elif user_input == 3:
+        elif user_input == "2":
+            closeTab(mytabs)
+            mainMenu()
+        elif user_input == "3":
             switchTab()
-        elif user_input == 4:
+        elif user_input == "4":
             displayAllTabs()
         elif user_input == 5:
             openNestedTab()
