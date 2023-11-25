@@ -3,19 +3,26 @@ import re
 import requests
 from bs4 import BeautifulSoup 
 import pprint
+
+
 #this code to open (load) the json file
 mytabs = {}
-myjsonfile = open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "r")
+original_path = "C:/Users/t4m16/Mid-term-solution/mytabs.json"
+myjsonfile = open(original_path, "r")
 jsondata = myjsonfile.read()
 mytabs = json.loads(jsondata)
+myjsonfile.close()
 
-def importTabs(mytabs):
-   user_path = input("Enter the path to load JSON from: ")
+def importTabs(original_path):
    mytabs = {}
-   myjsonfile = open("C:/Users/t4m16/OneDrive/Desktop/mytabs2.json", "r")
+   original_path = "C:/Users/t4m16/OneDrive/Desktop/mytabs2.json"
+   myjsonfile = open(original_path, "r")
    jsondata = myjsonfile.read()
    mytabs = json.loads(jsondata)
-   return mytabs
+   myjsonfile.close()
+   print(original_path)
+   # return original_path
+
 
 def saveTabs(mytabs):
    try:
