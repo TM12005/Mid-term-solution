@@ -8,20 +8,17 @@ import pprint
 #this code to open (load) the json file
 mytabs = {}
 original_path = f"C:/Users/t4m16/Mid-term-solution/mytabs.json"
-myjsonfile = open(original_path, "r")
-jsondata = myjsonfile.read()
-mytabs = json.loads(jsondata)
-myjsonfile.close()
+
 
 def importTabs(original_path, mytabs):
-   mytabs.clear()
+   # mytabs.clear()
    original_path = f"C:/Users/t4m16/OneDrive/Desktop/mytabs2.json"
    myjsonfile = open(original_path, "r")
    jsondataa = myjsonfile.read()
    mytabs = json.loads(jsondataa)
    print(mytabs)
    print(original_path)
-   return mytabs
+   return original_path, mytabs
    
 
 
@@ -178,6 +175,10 @@ def closeTab(mytabs):
 
 # Main menu that display option lists
 def mainMenu():
+    myjsonfile = open(original_path, "r")
+    jsondata = myjsonfile.read()
+    mytabs = json.loads(jsondata)
+    myjsonfile.close()
     
     #List to display in terminal
     print("1. Open Tab")
@@ -192,7 +193,7 @@ def mainMenu():
     
     user_input = input("Please Choose A Number:")
     #Continues While loop that exits only when user enter "9"
-    while user_input != "9":
+    while user_input is not "9":
         if user_input == "1":
             openTab(mytabs)
             mainMenu()
@@ -216,10 +217,12 @@ def mainMenu():
             mainMenu()
         elif user_input == "8":
             importTabs(original_path, mytabs)
+            mainMenu()
             
         else:
             print("Invalid Input, Please enter a number from the list")
             user_input = int(input("Please Choose A Number:"))
-            
+    else:
+      print("GoodBye")      
             
 mainMenu()
