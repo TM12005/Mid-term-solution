@@ -2,6 +2,7 @@ import json
 import re
 import requests
 from bs4 import BeautifulSoup 
+import pprint
 #this code to open (load) the json file
 mytabs = {}
 myjsonfile = open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "r")
@@ -11,10 +12,11 @@ mytabs = json.loads(jsondata)
 
 def sortAllTabs(mytabs):
    border=0
-   while border <len(mytabs)-1: #O(n), n being the length of the list
+   
+   while border < len(mytabs)-1: #O(n), n being the length of the list
       minIndex=border # contain the index of the minimum element
       for i in range(border+1, len(mytabs)): # to find the index of the minimum element, O(n)
-         if mytabs[i]<mytabs[minIndex]: #O(1), is the line that specifies the order
+         if str(*mytabs[i].keys()).lower()<str(*mytabs[minIndex].keys()).lower(): #O(1), is the line that specifies the order
             minIndex=i
       #swap the two elements
       temp=mytabs[border] #O(1)
@@ -25,7 +27,9 @@ def sortAllTabs(mytabs):
 
       border=border+1
       # border+=1
-   print(mytabs)
+   for i in mytabs:
+      pprint.pprint(*i.keys())
+   
 
 def openNestedTab(mytabs):
    viewTabs(mytabs)
