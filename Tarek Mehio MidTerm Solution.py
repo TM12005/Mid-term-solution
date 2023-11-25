@@ -42,7 +42,12 @@ def switchTab(mytabs):
       mainMenu()
    else:
       url_web = str(*mytabs[num_to_int].values())
+      url_web = url_web[2:-2]
+      print(url_web)
+      
       url_https = "https://"+url_web
+      # print(url_web)
+      # print("https://".map(str, url_web))
    
    # print(url_https)
    
@@ -57,7 +62,7 @@ def switchTab(mytabs):
    
 #Save a new tab in the JSON file
 def openTab(mytabs):
-    print(mytabs)
+   #  print(mytabs)
     #inputs from the user (Title and URL)
     tab_title = input("Enter tab name: ")
     tab_url = input("Enter URL: ")
@@ -68,10 +73,10 @@ def openTab(mytabs):
     if result: 
         print("Tab added")
     #Updating the dictionary and saving the changes in the JSON
-        mytabs.append({tab_title : tab_url})
+        mytabs.append({tab_title : [tab_url]})
         with open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "w") as f:
             json.dump(mytabs, f)
-        print(mytabs)
+      #   print(mytabs)
     else:
         print("Invalid URL")
         
