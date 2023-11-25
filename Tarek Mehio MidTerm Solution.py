@@ -9,6 +9,14 @@ myjsonfile = open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "r")
 jsondata = myjsonfile.read()
 mytabs = json.loads(jsondata)
 
+def importTabs(mytabs):
+   user_path = input("Enter the path to load JSON from: ")
+   mytabs = {}
+   myjsonfile = open("C:/Users/t4m16/OneDrive/Desktop/mytabs2.json", "r")
+   jsondata = myjsonfile.read()
+   mytabs = json.loads(jsondata)
+   return mytabs
+
 def saveTabs(mytabs):
    try:
       file_path = input("Enter JSON file path: ")
