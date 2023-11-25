@@ -10,10 +10,14 @@ jsondata = myjsonfile.read()
 mytabs = json.loads(jsondata)
 
 def saveTabs(mytabs):
-   file_path = input("Enter JSON file path: ")
-   with open("C:/Users/t4m16/Mid-term-solution/tabs2.json", "w") as json_file:
-      json_file.write(mytabs)
-      print("Saved Succesfully")
+   try:
+      file_path = input("Enter JSON file path: ")
+      file_path = file_path+"/mytabs.json"
+      with open(file_path, "w") as f:
+               json.dump(mytabs, f)
+   except:
+      print("Invalid path") 
+   print("Saved Succesfully")
 
 
 def sortAllTabs(mytabs):
