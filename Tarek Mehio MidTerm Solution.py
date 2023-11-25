@@ -8,8 +8,14 @@ myjsonfile = open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "r")
 jsondata = myjsonfile.read()
 mytabs = json.loads(jsondata)
 
-def epenNestedTab(mytabs):
-   print(mytabs.keys())
+def openNestedTab(mytabs):
+   viewTabs(mytabs)
+   tab_number = int(input("Enter the number from the list"))
+   tab_name = str(*mytabs[tab_number].keys())
+   print(tab_name)
+   # for i in range(len(mytabs)):
+   test = str(mytabs[tab_number][tab_name])
+   print(test)
    
 
 
@@ -129,7 +135,7 @@ def mainMenu():
     
     user_input = input("Please Choose A Number:")
     #Continues While loop that exits only when user enter "9"
-    while user_input != 9:
+    while user_input != "9":
         if user_input == "1":
             openTab(mytabs)
             mainMenu()
@@ -141,13 +147,14 @@ def mainMenu():
             mainMenu()
         elif user_input == "4":
             displayAllTabs()
-        elif user_input == 5:
-            openNestedTab(tabs)
-        elif user_input == 6:
+        elif user_input == "5":
+            openNestedTab(mytabs)
+            mainMenu()
+        elif user_input == "6":
             sortAllTabs()
-        elif user_input == 7:
+        elif user_input == "7":
             saveTabs()
-        elif user_input == 8:
+        elif user_input == "8":
             importTabs()
         else:
             print("Invalid Input, Please enter a number from the list")
