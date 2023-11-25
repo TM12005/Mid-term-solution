@@ -7,21 +7,22 @@ import pprint
 
 #this code to open (load) the json file
 mytabs = {}
-original_path = "C:/Users/t4m16/Mid-term-solution/mytabs.json"
+original_path = f"C:/Users/t4m16/Mid-term-solution/mytabs.json"
 myjsonfile = open(original_path, "r")
 jsondata = myjsonfile.read()
 mytabs = json.loads(jsondata)
 myjsonfile.close()
 
-def importTabs(original_path):
-   mytabs = {}
-   original_path = "C:/Users/t4m16/OneDrive/Desktop/mytabs2.json"
+def importTabs(original_path, mytabs):
+   mytabs.clear()
+   original_path = f"C:/Users/t4m16/OneDrive/Desktop/mytabs2.json"
    myjsonfile = open(original_path, "r")
-   jsondata = myjsonfile.read()
-   mytabs = json.loads(jsondata)
-   myjsonfile.close()
+   jsondataa = myjsonfile.read()
+   mytabs = json.loads(jsondataa)
+   print(mytabs)
    print(original_path)
-   # return original_path
+   return mytabs
+   
 
 
 def saveTabs(mytabs):
@@ -177,6 +178,7 @@ def closeTab(mytabs):
 
 # Main menu that display option lists
 def mainMenu():
+    
     #List to display in terminal
     print("1. Open Tab")
     print("2. Close Tab")
@@ -213,8 +215,8 @@ def mainMenu():
             saveTabs(mytabs)
             mainMenu()
         elif user_input == "8":
-            importTabs(mytabs)
-            mainMenu()
+            importTabs(original_path, mytabs)
+            
         else:
             print("Invalid Input, Please enter a number from the list")
             user_input = int(input("Please Choose A Number:"))
