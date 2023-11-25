@@ -9,6 +9,12 @@ myjsonfile = open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "r")
 jsondata = myjsonfile.read()
 mytabs = json.loads(jsondata)
 
+def saveTabs(mytabs):
+   file_path = input("Enter JSON file path: ")
+   with open("C:/Users/t4m16/Mid-term-solution/tabs2.json", "w") as json_file:
+      json_file.write(mytabs)
+      print("Saved Succesfully")
+
 
 def sortAllTabs(mytabs):
    border=0
@@ -22,13 +28,9 @@ def sortAllTabs(mytabs):
       temp=mytabs[border] #O(1)
       mytabs[border]=mytabs[minIndex]
       mytabs[minIndex]=temp
-
-      # list1[border],list1[minIndex]=list1[minIndex],list1[border]
-
+      
       border=border+1
-      # border+=1
-   for i in mytabs:
-      pprint.pprint(*i.keys())
+   pprint.pprint(mytabs)
    
 
 def openNestedTab(mytabs):
@@ -189,10 +191,10 @@ def mainMenu():
             sortAllTabs(mytabs)
             mainMenu()
         elif user_input == "7":
-            saveTabs()
+            saveTabs(mytabs)
             mainMenu()
         elif user_input == "8":
-            importTabs()
+            importTabs(mytabs)
             mainMenu()
         else:
             print("Invalid Input, Please enter a number from the list")
