@@ -11,12 +11,19 @@ mytabs = json.loads(jsondata)
 def openNestedTab(mytabs):
    viewTabs(mytabs)
    tab_number = int(input("Enter the number from the list"))
+   new_tab = input("Enter the sub tab site")
    tab_name = str(*mytabs[tab_number].keys())
    print(tab_name)
    # for i in range(len(mytabs)):
-   test = str(mytabs[tab_number][tab_name])
-   print(test)
+   test = mytabs[tab_number][tab_name]
+   test.append(new_tab)
+   print("Sub Tab added")
    
+def displayAllTabs(mytabs):
+   for i in mytabs:
+      print(*i.keys(), end=" :\n")
+      print(*i.values())
+     
 
 
 
@@ -33,6 +40,7 @@ def switchTab(mytabs):
             mainMenu()
    if user_input == "":
       url_web = str(*mytabs[-1].values())
+      url_web = url_web[2:-2]
       url_https = "https://"+url_web
    elif num_to_int > len(mytabs):
       print("Invalid Number, number is too big")
@@ -43,8 +51,6 @@ def switchTab(mytabs):
    else:
       url_web = str(*mytabs[num_to_int].values())
       url_web = url_web[2:-2]
-      print(url_web)
-      
       url_https = "https://"+url_web
       # print(url_web)
       # print("https://".map(str, url_web))
@@ -151,16 +157,20 @@ def mainMenu():
             switchTab(mytabs)
             mainMenu()
         elif user_input == "4":
-            displayAllTabs()
+            displayAllTabs(mytabs)
+            mainMenu()
         elif user_input == "5":
             openNestedTab(mytabs)
             mainMenu()
         elif user_input == "6":
             sortAllTabs()
+            mainMenu()
         elif user_input == "7":
             saveTabs()
+            mainMenu()
         elif user_input == "8":
             importTabs()
+            mainMenu()
         else:
             print("Invalid Input, Please enter a number from the list")
             user_input = int(input("Please Choose A Number:"))
