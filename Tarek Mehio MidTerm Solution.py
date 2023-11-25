@@ -8,6 +8,25 @@ myjsonfile = open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "r")
 jsondata = myjsonfile.read()
 mytabs = json.loads(jsondata)
 
+
+def sortAllTabs(mytabs):
+   border=0
+   while border <len(mytabs)-1: #O(n), n being the length of the list
+      minIndex=border # contain the index of the minimum element
+      for i in range(border+1, len(mytabs)): # to find the index of the minimum element, O(n)
+         if mytabs[i]<mytabs[minIndex]: #O(1), is the line that specifies the order
+            minIndex=i
+      #swap the two elements
+      temp=mytabs[border] #O(1)
+      mytabs[border]=mytabs[minIndex]
+      mytabs[minIndex]=temp
+
+      # list1[border],list1[minIndex]=list1[minIndex],list1[border]
+
+      border=border+1
+      # border+=1
+   print(mytabs)
+
 def openNestedTab(mytabs):
    viewTabs(mytabs)
    tab_number = int(input("Enter the number from the list"))
@@ -163,7 +182,7 @@ def mainMenu():
             openNestedTab(mytabs)
             mainMenu()
         elif user_input == "6":
-            sortAllTabs()
+            sortAllTabs(mytabs)
             mainMenu()
         elif user_input == "7":
             saveTabs()
