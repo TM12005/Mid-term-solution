@@ -8,11 +8,15 @@ myjsonfile = open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "r")
 jsondata = myjsonfile.read()
 mytabs = json.loads(jsondata)
 
+def epenNestedTab(mytabs):
+   print(mytabs.keys())
+   
+
 
 
 def switchTab(mytabs):
    viewTabs(mytabs)
-   user_input = int(input("Enter the number of the tab: "))
+   user_input = input("Enter the number of the tab: ")
    #if the input was empty this if statement will not execut
    if user_input != "":
     #checks if the input can be converted to string
@@ -21,13 +25,29 @@ def switchTab(mytabs):
         except:
             print("Invalid input, Enter a number")
             mainMenu()
-   if user_input > len()
+   if user_input == "":
+      url_web = str(*mytabs[-1].values())
+      url_https = "https://"+url_web
+   elif num_to_int > len(mytabs):
+      print("Invalid Number, number is too big")
+      mainMenu()
+   elif num_to_int < 0:
+      print("Invalid number, number is too small")
+      mainMenu()
+   else:
+      url_web = str(*mytabs[num_to_int].values())
+      url_https = "https://"+url_web
    
-   print(*mytabs[0].values())
+   # print(url_https)
+   
+   
    #https://www.geeksforgeeks.org/python-web-scraping-tutorial/
-   # r = requests.get("https://www.google.com")
-   # soup = BeautifulSoup(r.content, 'html.parser') 
-   # print(soup.prettify()) 
+   r = requests.get(url_https)
+   soup = BeautifulSoup(r.content, 'html.parser') 
+   print(soup.prettify()) 
+   
+   
+   
    
 #Save a new tab in the JSON file
 def openTab(mytabs):
@@ -49,9 +69,15 @@ def openTab(mytabs):
     else:
         print("Invalid URL")
         
+        
+        
+        
 def viewTabs(mytabs):
    for i in range(len(mytabs)):
         print(i,"-", mytabs[i])
+        
+        
+        
         
 #Close/remove the tab function
 def closeTab(mytabs):
@@ -68,8 +94,7 @@ def closeTab(mytabs):
         except:
             print("Invalid input, Enter a number")
             mainMenu()
-    
-        
+            
     if ind_num == "":
         mytabs.pop()
         with open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "w") as f:
@@ -117,7 +142,7 @@ def mainMenu():
         elif user_input == "4":
             displayAllTabs()
         elif user_input == 5:
-            openNestedTab()
+            openNestedTab(tabs)
         elif user_input == 6:
             sortAllTabs()
         elif user_input == 7:
