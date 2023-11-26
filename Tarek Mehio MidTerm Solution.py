@@ -117,7 +117,7 @@ def switchTab(mytabs):
    #print the webscrape of the url_https link using beautifulsoup and requests
    #https://www.geeksforgeeks.org/python-web-scraping-tutorial/
    r = requests.get(url_https)#O(1)
-   soup = BeautifulSoup(r.content, 'html.parser') 
+   soup = BeautifulSoup(r.content, 'html.parser') #O(soup) soup the time it takes to fetch the web scrape
    print(soup.prettify()) 
    
    
@@ -132,60 +132,60 @@ def openTab(mytabs):
     #check if url is valid
     #https://snyk.io/blog/secure-python-url-validation/
     pattern = "^https:\/\/[0-9A-z.]+.[0-9A-z.]+.[a-z]+$"
-    result = re.match(pattern, "https://"+tab_url)
-    if result: 
-        print("Tab added")
+    result = re.match(pattern, "https://"+tab_url)#O(n) number of pattern length
+    if result: #O(1)
+        print("Tab added")#O(1)
     #Updating the dictionary and saving the changes in the JSON
-        mytabs.append({tab_title : [tab_url]})
-        with open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "w") as f:
-            json.dump(mytabs, f)
+        mytabs.append({tab_title : [tab_url]})#O(1)
+        with open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "w") as f:#O(1)
+            json.dump(mytabs, f)#O(1)
       #   print(mytabs)
     else:
-        print("Invalid URL")
+        print("Invalid URL")#O(1)
         
         
         
 #Function to view the tabs in the terminal       
-def viewTabs(mytabs):
-   for i in range(len(mytabs)):
-        print(i,"-", mytabs[i])
+def viewTabs(mytabs):#O(n)
+   for i in range(len(mytabs)):#O(n) n being the length of mytabs
+        print(i,"-", mytabs[i])#O(1)
         
         
         
         
 #Close/remove the tab function
-def closeTab(mytabs):
+def closeTab(mytabs):#O(n)
     
     #print the tabs in the list
-    viewTabs(mytabs)
+    viewTabs(mytabs)#O(n) n being the length of the dictionary
     
-    ind_num = input("Enter the number of the tab you want to remove")
+    ind_num = input("Enter the number of the tab you want to remove")#O(1)
     #if the input was empty this if statement will not execut
-    if ind_num != "":
+    if ind_num != "":#O(1)
     #checks if the input can be converted to string
         try:
-            num_to_int = int(ind_num)
+            num_to_int = int(ind_num)#O(1)
         except:
-            print("Invalid input, Enter a number")
+            print("Invalid input, Enter a number")#O(1)
             mainMenu()
     #if the input is None, then close the last tab 
-    if ind_num == "":
+    if ind_num == "":#O(1)
        #remove the last element in the list
-        mytabs.pop()
+        mytabs.pop()#O(1)
         #save the changes
-        with open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "w") as f:
-            json.dump(mytabs, f)
+        with open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "w") as f:#O(1)
+            json.dump(mytabs, f)#O(1)
    #check if input is out of range
-    elif num_to_int > len(mytabs):
-        print("invalid number")
-    elif num_to_int < 0:
-        print("invalid number")
-    else:
+    elif num_to_int > len(mytabs):#O(1)
+        print("invalid number")#O(1)
+    elif num_to_int < 0:#O(1)
+        print("invalid number")#O(1)
+    else:#O(1)
        #pop the num_to_int index element from the dictionary
-        mytabs.pop(num_to_int)
-        print(mytabs)
-        with open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "w") as f:
-            json.dump(mytabs, f)
+        mytabs.pop(num_to_int)#O(1)
+        print(mytabs)#O(1)
+        with open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "w") as f:#O(1)
+            json.dump(mytabs, f)#O(1)
             
 
 
@@ -196,7 +196,7 @@ def closeTab(mytabs):
 def mainMenu():
     
     
-    #List to display in terminal
+    #List to display in terminal #O(1)
     print("1. Open Tab")
     print("2. Close Tab")
     print("3. Switch Tab")
@@ -207,10 +207,10 @@ def mainMenu():
     print("8. Import Tabs")
     print("9. Exit")
     
-    user_input = input("Please Choose A Number:")
+    user_input = input("Please Choose A Number:")#O(1)
     #Continues While loop that exits only when user enter "9"
-    while user_input is not "9":
-        if user_input == "1":
+    while user_input is not "9":#O(1)
+        if user_input == "1":#O(1)
             openTab(mytabs)
             mainMenu()
         elif user_input == "2":
@@ -236,9 +236,9 @@ def mainMenu():
             mainMenu()
             
         else:
-            print("Invalid Input, Please enter a number from the list")
-            user_input = int(input("Please Choose A Number:"))
+            print("Invalid Input, Please enter a number from the list")#O(1)
+            user_input = int(input("Please Choose A Number:"))#O(1)
     else:
-      print("GoodBye")      
+      print("GoodBye")      #O(1)
             
 mainMenu()
