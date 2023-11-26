@@ -10,12 +10,12 @@ mytabs = {}
 original_path = f"C:/Users/t4m16/Mid-term-solution/mytabs.json"
 myjsonfile = open(original_path, "r") #O(1)
 jsondata = myjsonfile.read() #O(1)
-mytabs = json.loads(jsondata)#O(1)
+mytabs = json.loads(jsondata)#O(n) n the size of the JSON file
 myjsonfile.close()#O(1)
 
 
 #Function to read a JSON file
-def importTabs(original_path, mytabs):
+def importTabs(original_path, mytabs): #O(n) n the size of the JSON file
    #f"C:/Users/t4m16/OneDrive/Desktop/mytabs2.json"
    try:
       original_path = input("Enter the path of the JSON file: ")
@@ -30,32 +30,32 @@ def importTabs(original_path, mytabs):
    
 
 #Function that takes path from the user and saves the file
-def saveTabs(mytabs):
+def saveTabs(mytabs):#O(n) n being the length of the dictionary
    #check if the path is valid with the try
    try:
-      file_path = input("Enter JSON file path: ")
+      file_path = input("Enter JSON file path: ")#O(1)
       # file_path = file_path+"/mytabs.json"
       with open(file_path, "w") as f:
-               json.dump(mytabs, f)
+               json.dump(mytabs, f)#O(n) n being the length of the dictionary
    except:
-      print("Invalid path") 
-   print("Saved Succesfully")
+      print("Invalid path") #O(1)
+   print("Saved Succesfully")#O(1)
 
 #Sorting tabs with SelectionSort 
-def sortAllTabs(mytabs):
+def sortAllTabs(mytabs):#O(n^2)
    border=0
    
-   while border < len(mytabs)-1: #O(n),
+   while border < len(mytabs)-1: #O(n), n being the of lenth mytabs
       minIndex=border 
-      for i in range(border+1, len(mytabs)): # O(n)
+      for i in range(border+1, len(mytabs)): # O(n) 
          if str(*mytabs[i].keys()).lower()<str(*mytabs[minIndex].keys()).lower(): #O(1)
             minIndex=i
       #swap the two elements
       temp=mytabs[border] #O(1)
-      mytabs[border]=mytabs[minIndex]
-      mytabs[minIndex]=temp
+      mytabs[border]=mytabs[minIndex]#O(1)
+      mytabs[minIndex]=temp#O(1)
       
-      border=border+1
+      border=border+1#O(1)
    pprint.pprint(mytabs)
    
 #Open a nested Tab in the dictionary
