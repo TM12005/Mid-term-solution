@@ -60,7 +60,7 @@ def sortAllTabs(mytabs):#O(n^2)
    
 #Open a nested Tab in the dictionary
 def openNestedTab(mytabs):
-   viewTabs(mytabs)
+   viewTabs(mytabs)#O(n) n being number of list
    #take number from the list to pick tab family
    tab_number = int(input("Enter the number from the list"))
    #Site name to be added
