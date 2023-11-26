@@ -11,14 +11,16 @@ original_path = f"C:/Users/t4m16/Mid-term-solution/mytabs.json"
 
 
 def importTabs(original_path, mytabs):
-   # mytabs.clear()
-   original_path = f"C:/Users/t4m16/OneDrive/Desktop/mytabs2.json"
+   #f"C:/Users/t4m16/OneDrive/Desktop/mytabs2.json"
+   original_path = input("Enter the path of the JSON file: ")
    myjsonfile = open(original_path, "r")
    jsondataa = myjsonfile.read()
    mytabs = json.loads(jsondataa)
-   print(mytabs)
-   print(original_path)
-   return original_path, mytabs
+   pprint.pprint(mytabs)
+   # with open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "w") as f:
+   #          json.dump(mytabs, f)
+   
+   
    
 
 
@@ -56,9 +58,12 @@ def openNestedTab(mytabs):
    new_tab = input("Enter the sub tab site")
    tab_name = str(*mytabs[tab_number].keys())
    print(tab_name)
-   # for i in range(len(mytabs)):
+   
    test = mytabs[tab_number][tab_name]
    test.append(new_tab)
+   with open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "w") as f:
+            json.dump(mytabs, f)
+   print(test)
    print("Sub Tab added")
    
 def displayAllTabs(mytabs):
