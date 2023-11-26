@@ -8,10 +8,10 @@ import pprint
 #this code to open (load) the json file
 mytabs = {}
 original_path = f"C:/Users/t4m16/Mid-term-solution/mytabs.json"
-myjsonfile = open(original_path, "r")
-jsondata = myjsonfile.read()
-mytabs = json.loads(jsondata)
-myjsonfile.close()
+myjsonfile = open(original_path, "r") #O(1)
+jsondata = myjsonfile.read() #O(1)
+mytabs = json.loads(jsondata)#O(1)
+myjsonfile.close()#O(1)
 
 
 #Function to read a JSON file
@@ -172,16 +172,20 @@ def closeTab(mytabs):
         except:
             print("Invalid input, Enter a number")
             mainMenu()
-            
+    #if the input is None, then close the last tab 
     if ind_num == "":
+       #remove the last element in the list
         mytabs.pop()
+        #save the changes
         with open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "w") as f:
             json.dump(mytabs, f)
+   #check if input is out of range
     elif num_to_int > len(mytabs):
         print("invalid number")
     elif num_to_int < 0:
         print("invalid number")
     else:
+       #pop the num_to_int index element from the dictionary
         mytabs.pop(num_to_int)
         print(mytabs)
         with open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "w") as f:
