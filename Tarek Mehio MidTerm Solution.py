@@ -34,12 +34,12 @@ def saveTabs(mytabs):#O(n) n being the length of the dictionary
    #check if the path is valid with the try
    try:
       file_path = input("Enter JSON file path: ")#O(1)
-      # file_path = file_path+"/mytabs.json"
       with open(file_path, "w") as f:
                json.dump(mytabs, f)#O(n) n being the length of the dictionary
+               print("Saved Succesfully")#O(1)
    except:
       print("Invalid path") #O(1)
-   print("Saved Succesfully")#O(1)
+   
 
 #Sorting tabs with SelectionSort 
 def sortAllTabs(mytabs):#O(n^2)
