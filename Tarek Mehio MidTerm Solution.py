@@ -7,7 +7,7 @@ import pprint
 
 #this code to open (load) the json file
 mytabs = {}
-original_path = f"C:/Users/t4m16/Mid-term-solution/mytabs.json"
+original_path = f"./mytabs.json"
 myjsonfile = open(original_path, "r") #O(1)
 jsondata = myjsonfile.read() #O(1)
 mytabs = json.loads(jsondata)#O(n) n the size of the JSON file
