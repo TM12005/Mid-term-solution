@@ -8,8 +8,13 @@ import pprint
 #this code to open (load) the json file
 mytabs = {}
 original_path = f"C:/Users/t4m16/Mid-term-solution/mytabs.json"
+myjsonfile = open(original_path, "r")
+jsondata = myjsonfile.read()
+mytabs = json.loads(jsondata)
+myjsonfile.close()
 
 
+#Function to read a JSON file
 def importTabs(original_path, mytabs):
    #f"C:/Users/t4m16/OneDrive/Desktop/mytabs2.json"
    try:
@@ -24,25 +29,26 @@ def importTabs(original_path, mytabs):
    
    
 
-
+#Function that takes path from the user and saves the file
 def saveTabs(mytabs):
+   #check if the path is valid with the try
    try:
       file_path = input("Enter JSON file path: ")
-      file_path = file_path+"/mytabs.json"
+      # file_path = file_path+"/mytabs.json"
       with open(file_path, "w") as f:
                json.dump(mytabs, f)
    except:
       print("Invalid path") 
    print("Saved Succesfully")
 
-
+#Sorting tabs with SelectionSort 
 def sortAllTabs(mytabs):
    border=0
    
-   while border < len(mytabs)-1: #O(n), n being the length of the list
-      minIndex=border # contain the index of the minimum element
-      for i in range(border+1, len(mytabs)): # to find the index of the minimum element, O(n)
-         if str(*mytabs[i].keys()).lower()<str(*mytabs[minIndex].keys()).lower(): #O(1), is the line that specifies the order
+   while border < len(mytabs)-1: #O(n),
+      minIndex=border 
+      for i in range(border+1, len(mytabs)): # O(n)
+         if str(*mytabs[i].keys()).lower()<str(*mytabs[minIndex].keys()).lower(): #O(1)
             minIndex=i
       #swap the two elements
       temp=mytabs[border] #O(1)
@@ -52,14 +58,17 @@ def sortAllTabs(mytabs):
       border=border+1
    pprint.pprint(mytabs)
    
-
+#Open a nested Tab in the dictionary
 def openNestedTab(mytabs):
    viewTabs(mytabs)
+   #take number from the list to pick tab family
    tab_number = int(input("Enter the number from the list"))
+   #Site name to be added
    new_tab = input("Enter the sub tab site")
+   #fetch the key name of the tab_number
    tab_name = str(*mytabs[tab_number].keys())
    print(tab_name)
-   
+   #append the new value and save
    test = mytabs[tab_number][tab_name]
    test.append(new_tab)
    with open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "w") as f:
@@ -67,6 +76,7 @@ def openNestedTab(mytabs):
    print(test)
    print("Sub Tab added")
    
+#Display the all the tabs
 def displayAllTabs(mytabs):
    for i in mytabs:
       print(*i.keys(), end=" :\n")
@@ -74,7 +84,7 @@ def displayAllTabs(mytabs):
      
 
 
-
+#to show the web scrape of the URL
 def switchTab(mytabs):
    viewTabs(mytabs)
    user_input = input("Enter the number of the tab: ")
@@ -86,10 +96,12 @@ def switchTab(mytabs):
         except:
             print("Invalid input, Enter a number")
             mainMenu()
+   #check if input is None, and print the last element (webscrape)
    if user_input == "":
       url_web = str(*mytabs[-1].values())
       url_web = url_web[2:-2]
       url_https = "https://"+url_web
+   #If number is out of range
    elif num_to_int > len(mytabs):
       print("Invalid Number, number is too big")
       mainMenu()
@@ -97,15 +109,16 @@ def switchTab(mytabs):
       print("Invalid number, number is too small")
       mainMenu()
    else:
+      #Remove the bracets from the string to be added to url_https
       url_web = str(*mytabs[num_to_int].values())
       url_web = url_web[2:-2]
       url_https = "https://"+url_web
       # print(url_web)
       # print("https://".map(str, url_web))
    
-   # print(url_https)
    
    
+   #print the webscrape of the url_https link using beautifulsoup and requests
    #https://www.geeksforgeeks.org/python-web-scraping-tutorial/
    r = requests.get(url_https)
    soup = BeautifulSoup(r.content, 'html.parser') 
@@ -136,7 +149,7 @@ def openTab(mytabs):
         
         
         
-        
+#Function to view the tabs in the terminal       
 def viewTabs(mytabs):
    for i in range(len(mytabs)):
         print(i,"-", mytabs[i])
@@ -181,10 +194,7 @@ def closeTab(mytabs):
 
 # Main menu that display option lists
 def mainMenu():
-    myjsonfile = open(original_path, "r")
-    jsondata = myjsonfile.read()
-    mytabs = json.loads(jsondata)
-    myjsonfile.close()
+    
     
     #List to display in terminal
     print("1. Open Tab")
