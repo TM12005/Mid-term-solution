@@ -59,26 +59,26 @@ def sortAllTabs(mytabs):#O(n^2)
    pprint.pprint(mytabs)
    
 #Open a nested Tab in the dictionary
-def openNestedTab(mytabs):
+def openNestedTab(mytabs):#O(n^3)
    viewTabs(mytabs)#O(n) n being number of list
    #take number from the list to pick tab family
-   tab_number = int(input("Enter the number from the list"))
+   tab_number = int(input("Enter the number from the list"))#O(1)
    #Site name to be added
-   new_tab = input("Enter the sub tab site")
+   new_tab = input("Enter the sub tab site")#O(1)
    #fetch the key name of the tab_number
-   tab_name = str(*mytabs[tab_number].keys())
-   print(tab_name)
+   tab_name = str(*mytabs[tab_number].keys())#O(1)
+   # print(tab_name)#O(1)
    #append the new value and save
-   test = mytabs[tab_number][tab_name]
-   test.append(new_tab)
-   with open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "w") as f:
-            json.dump(mytabs, f)
-   print(test)
-   print("Sub Tab added")
+   test = mytabs[tab_number][tab_name]#O(1)
+   test.append(new_tab)#O(n), n being the length of the list
+   with open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "w") as f:#O(1)
+            json.dump(mytabs, f)#O(n) n being legth of dictionary
+   print(test)#O(1)
+   print("Sub Tab added")#O(1)
    
 #Display the all the tabs
-def displayAllTabs(mytabs):
-   for i in mytabs:
+def displayAllTabs(mytabs):#O(n)
+   for i in mytabs:#O(n) n being the length of the dictionary
       print(*i.keys(), end=" :\n")
       print(*i.values())
      
@@ -86,41 +86,37 @@ def displayAllTabs(mytabs):
 
 #to show the web scrape of the URL
 def switchTab(mytabs):
-   viewTabs(mytabs)
+   viewTabs(mytabs)#O(n) n being length of the dictionary mytabs
    user_input = input("Enter the number of the tab: ")
    #if the input was empty this if statement will not execut
-   if user_input != "":
+   if user_input != "":#O(1)
     #checks if the input can be converted to string
         try:
-            num_to_int = int(user_input)
+            num_to_int = int(user_input)#O(1)
         except:
-            print("Invalid input, Enter a number")
+            print("Invalid input, Enter a number")#O(1)
             mainMenu()
    #check if input is None, and print the last element (webscrape)
-   if user_input == "":
-      url_web = str(*mytabs[-1].values())
-      url_web = url_web[2:-2]
-      url_https = "https://"+url_web
+   if user_input == "":#O(1)
+      url_web = str(*mytabs[-1].values())#O(1)
+      url_web = url_web[2:-2]#O(1)
+      url_https = "https://"+url_web#O(1)
    #If number is out of range
-   elif num_to_int > len(mytabs):
-      print("Invalid Number, number is too big")
+   elif num_to_int > len(mytabs):#O(1)
+      print("Invalid Number, number is too big")#O(1)
       mainMenu()
-   elif num_to_int < 0:
-      print("Invalid number, number is too small")
+   elif num_to_int < 0:#O(1)
+      print("Invalid number, number is too small")#O(1)
       mainMenu()
    else:
       #Remove the bracets from the string to be added to url_https
-      url_web = str(*mytabs[num_to_int].values())
-      url_web = url_web[2:-2]
-      url_https = "https://"+url_web
-      # print(url_web)
-      # print("https://".map(str, url_web))
-   
-   
-   
+      url_web = str(*mytabs[num_to_int].values())#O(1)
+      url_web = url_web[2:-2]#O(1)
+      url_https = "https://"+url_web#O(1)
+      
    #print the webscrape of the url_https link using beautifulsoup and requests
    #https://www.geeksforgeeks.org/python-web-scraping-tutorial/
-   r = requests.get(url_https)
+   r = requests.get(url_https)#O(1)
    soup = BeautifulSoup(r.content, 'html.parser') 
    print(soup.prettify()) 
    
