@@ -12,13 +12,14 @@ original_path = f"C:/Users/t4m16/Mid-term-solution/mytabs.json"
 
 def importTabs(original_path, mytabs):
    #f"C:/Users/t4m16/OneDrive/Desktop/mytabs2.json"
-   original_path = input("Enter the path of the JSON file: ")
-   myjsonfile = open(original_path, "r")
-   jsondataa = myjsonfile.read()
-   mytabs = json.loads(jsondataa)
-   pprint.pprint(mytabs)
-   # with open("C:/Users/t4m16/Mid-term-solution/mytabs.json", "w") as f:
-   #          json.dump(mytabs, f)
+   try:
+      original_path = input("Enter the path of the JSON file: ")
+      myjsonfile = open(original_path, "r")
+      jsondataa = myjsonfile.read()
+      mytabs = json.loads(jsondataa)
+      pprint.pprint(mytabs)
+   except:
+      print("invalid input")
    
    
    
