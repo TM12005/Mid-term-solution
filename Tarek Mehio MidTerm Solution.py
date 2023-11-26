@@ -26,8 +26,7 @@ def importTabs(original_path, mytabs): #O(n) n the size of the JSON file
    except:
       print("invalid input")
    
-   
-   
+
 
 #Function that takes path from the user and saves the file
 def saveTabs(mytabs):#O(n) n being the length of the dictionary
@@ -40,11 +39,12 @@ def saveTabs(mytabs):#O(n) n being the length of the dictionary
    except:
       print("Invalid path") #O(1)
    
+   
+   
 
 #Sorting tabs with SelectionSort 
 def sortAllTabs(mytabs):#O(n^2)
    border=0
-   
    while border < len(mytabs)-1: #O(n), n being the of lenth mytabs
       minIndex=border 
       for i in range(border+1, len(mytabs)): # O(n) 
@@ -57,6 +57,8 @@ def sortAllTabs(mytabs):#O(n^2)
       
       border=border+1#O(1)
    pprint.pprint(mytabs)
+   
+   
    
 #Open a nested Tab in the dictionary
 def openNestedTab(mytabs):#O(n^3)
@@ -75,6 +77,9 @@ def openNestedTab(mytabs):#O(n^3)
             json.dump(mytabs, f)#O(n) n being legth of dictionary
    print(test)#O(1)
    print("Sub Tab added")#O(1)
+   
+   
+   
    
 #Display the all the tabs
 def displayAllTabs(mytabs):#O(n)
@@ -145,6 +150,7 @@ def openTab(mytabs):
         
         
         
+        
 #Function to view the tabs in the terminal       
 def viewTabs(mytabs):#O(n)
    for i in range(len(mytabs)):#O(n) n being the length of mytabs
@@ -194,8 +200,6 @@ def closeTab(mytabs):#O(n)
 
 # Main menu that display option lists
 def mainMenu():
-    
-    
     #List to display in terminal #O(1)
     print("1. Open Tab")
     print("2. Close Tab")
@@ -233,8 +237,7 @@ def mainMenu():
             mainMenu()
         elif user_input == "8":
             importTabs(original_path, mytabs)
-            mainMenu()
-            
+            mainMenu() 
         else:
             print("Invalid Input, Please enter a number from the list")#O(1)
             user_input = int(input("Please Choose A Number:"))#O(1)
